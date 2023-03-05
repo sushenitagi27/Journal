@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animate Form</title>
+	<style>
+        body{
+            background-color: #333;
+            
+        }
+        h1 {
+			font-size: 48px;
+			color: #ecd715;
+			text-align: center;
+			margin-top: 50px;
+			position: relative;
+			animation: heading-slide 1s ease-in-out forwards;
+		}
+		
+		/* Animation for heading */
+		@keyframes heading-slide {
+			from {
+				opacity: 0;
+				transform: translateY(-50%);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		/* Styling for form fields */
+		input[type="date"],
+		input[type="time"],
+		input[type="number"],
+		input[type="text"] {
+            font-style: normal;
+			display: block;
+			margin: 10px 10px;
+			padding: 10px;
+			border: 3px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+            
+		}
+		
+		input[type="submit"] {
+			display: block;
+			margin: 10px 0;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: #f21c1c;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+		
+		input[type="submit"]:hover {
+			background-color: #0062cc;
+		}
+		
+		/* Styling for form container */
+		.form-container {
+            text-justify: auto;
+			position: relative;
+			margin: 50px auto;
+			width: 400px;
+			height: 700px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+			border-radius: 10px;
+			padding: 20px;
+			animation: form-slide 0.5s ease-in-out forwards;
+            background-color: #eaeaea;
+		}
+		
+		/* Animation for form container */
+		@keyframes form-slide {
+			from {
+				opacity: 0;
+				transform: translateY(-50%);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	</style>
+</head>
+<body>
+    <h1>Traders Journal</h1>
+	<div class="form-container">
+		<form name="google-sheet" id="google-sheet">
+			<label>Date:</label>
+			<input type="date" name="date" required>
+			
+			<label>Time:</label>
+			<input type="time" name="time" required>
+			
+			<label>Script:</label>
+			<input type="text" name="script" required>
+			
+			<label>Entry Price:</label>
+			<input type="number" name="entry-price" step="0.01" required>
+			
+			<label>SL:</label>
+			<input type="number" name="sl" step="0.01" required>
+			
+			<label>Exit Price:</label>
+			<input type="number" name="exit-price" step="0.01" required>
+			
+			<label>P&L:</label>
+			<input type="number" name="pnl" step="0.01" required>
+			
+			<label>Setup:</label>
+			<input type="text" name="setup" required>
+			
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzjqKFhfiVXURTpf8-92reeIReCuzgSQyFSnwHFSQeI_QQ2pXXlhu-Uh3RKmguo80pF/exec'
+        const form = document.forms['google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            // .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+            // .catch(error => console.error('Error!', error.message))
+            document.getElementById("google-sheet").reset()
+            
+        })
+        
+      </script>
+</body>
+</html>
 
